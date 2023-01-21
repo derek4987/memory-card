@@ -2,7 +2,12 @@
 
 import React, { useState } from 'react';
 import './App.css';
+import { photoIndex } from './assets/01-index';
+import Cards from './components/js/Cards';
 import logo from './assets/RandMLogo.png';
+
+
+const bgs = photoIndex();
 
 function App() {
   return (
@@ -15,23 +20,14 @@ function App() {
           </div>
           <div id='header-right'>
             <div id='guesses'>Guesses: 0</div>
-            <div id='highScore'>High score: 0</div>
+            <div id='highScore'>Top score: 0</div>
           </div>
         </div>
       </div>
       <div id='cards-area'>
         <div id='board'>
-          {/* div's here as placeholders so I can test page layout will be component */}
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div>
+          {/* components cards are in 9x4 grid  */}
+          < Cards />
         </div>
       </div>
     </div>
