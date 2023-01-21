@@ -27,7 +27,7 @@ function App() {
       <div id='cards-area'>
         <div id='board'>
           {/* components cards are in 9x4 grid  */}
-          < Cards />
+          < Cards frontImage={ bgs.rick } />
         </div>
       </div>
     </div>

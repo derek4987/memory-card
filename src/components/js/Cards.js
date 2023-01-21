@@ -9,14 +9,14 @@ import { photoIndex } from '../../assets/01-index';
 
 const bgs = photoIndex();
 
-function Cards() {
+function Cards(props) {
 
     const [source, setSource] = useState(bgs.cardBack);
 
     const handleSetSource = (e) => {
-        setSource(bgs.rick);
-        // add clarity to what I want to click (won't work if img is selected)
-        e.target.firstElementChild.setAttribute('alt','front of cards jpg')
+        setSource(props.frontImage);
+        // add clarity to what I want to click
+        e.target.setAttribute('alt','front of cards jpg')
     }
 
     return (
