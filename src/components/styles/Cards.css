@@ -18,3 +18,8 @@
     filter: brightness(85%);
     border-radius: 10px;
 }
+
+.matched {
+    filter: brightness(70%);
+    pointer-events: none;
+}

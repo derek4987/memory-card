@@ -14,14 +14,21 @@ function Cards(props) {
     const [source, setSource] = useState(bgs.cardBack);
 
     const handleSetSource = (e) => {
-        setSource(props.frontImage);
-        // add clarity to what I want to click
-        e.target.setAttribute('alt','front of cards jpg')
+        if (source !== props.frontImage) {
+            setSource(props.frontImage);
+            // add clarity to what I want to click
+            e.target.setAttribute('alt','front of cards jpg');
+            e.target.classList.remove('cardBack');
+            e.target.classList.add('cardFront');
+            e.target.classList.add('selected');  
+        } else {
+            return
+        }        
     }
 
     return (
-        <button className='card' onClick={handleSetSource}>
-            <img className='cardImg' src={ source } alt='back of cards png' />
+        <button className='card unMatched' onClick={handleSetSource}>
+            <img className='cardImg cardBack' src={ source } alt='back of cards png' />
         </button>
     );
 
