@@ -45,15 +45,34 @@ function shuffleArray(array) {
   return array;
 }
 
+// edit card source to change to back of card
+function editSrcAttribute(element, newSrc) {
+  element.src = newSrc;
+}
+
+// compare elements function
+function compareElements(a, b) {
+  return a.outerHTML === b.outerHTML;
+}
+
 // check for match
 function checkForMatch(array) {
   // it is a match, logic in if statement not working
-  if (array[0] === array[1]) {
+  if (compareElements(array[0], array[1])) {
+    // elements are equal
+    selectedCards = [];
     for (const item of array) {
-      item.classList.remove('unMatched');
-      item.classList.add('matched');
+      item.parentElement.classList.remove('unMatched');
+      item.classList.remove('selected');
+      item.parentElement.classList.add('matched');
     }
-  } 
+  } else {
+    // disable card if no match
+    let buttons = document.querySelectorAll('.unMatched');
+    for (const button of buttons) {
+      button.classList.add('disableCards');
+    }
+  }
 }
 
 // game logic
@@ -70,43 +89,35 @@ function App() {
   const [guesses, setGuesses] = useState(0);
   const [topScore, setTopScore] = useState(0);
 
-  IMAGES = shuffleArray(IMAGES);
+  // IMAGES = shuffleArray(IMAGES);
 
   // Event delegation listeners
   document.addEventListener('click', function(e) {
 
+    // logic for selecting a pair of card and checking for a match
     if (e.target.matches('.selected') && selectedCards.includes(e.target) === false) {
       if (selectedCards.length < 2) {
         const selectedCard = e.target;
         selectedCards.push(selectedCard);
         console.log(selectedCards);
         if (selectedCards.length === 2) {
-          // check cards for match logic/ fuction
           checkForMatch(selectedCards);
-          
-          // if it was match. logic of x[0] === x[1] isn't working
-          if (selectedCards[0] === selectedCards[1]) {
-            selectedCards = [];
-            return;
-          } else {
-            // disable card if no match
-            let buttons = document.querySelectorAll('.unMatched');
-            for (const button of buttons) {
-              button.classList.add('disableCards');
-            }
-          }
-        }
-          
+          // update setGuesses state
+        }          
       } else return;            
     }
 
+    // to flip cards back over is there wasn't a match
     if (e.target.matches('#board') && selectedCards.length === 2) {
-      selectedCards = [];
       let buttons = document.querySelectorAll('.unMatched');
       for (const button of buttons) {
         button.classList.remove('disableCards');
       }
-      // add logic to flip cards back over
+      // flip cards back over, change src to cardBack
+        // below js not working. need to change state inside component
+      // editSrcAttribute(selectedCards[0], bgs.cardBack);
+      // editSrcAttribute(selectedCards[1], bgs.cardBack);
+      selectedCards = [];
     }
 
   }, false);
