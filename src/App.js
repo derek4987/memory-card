@@ -44,12 +44,6 @@ function shuffleArray(array) {
   }
   return array;
 }
-
-// edit card source to change to back of card
-function editSrcAttribute(element, newSrc) {
-  element.src = newSrc;
-}
-
 // compare elements function
 function compareElements(a, b) {
   return a.outerHTML === b.outerHTML;
@@ -57,7 +51,7 @@ function compareElements(a, b) {
 
 // check for match
 function checkForMatch(array) {
-  // it is a match, logic in if statement not working
+  // it is a match
   if (compareElements(array[0], array[1])) {
     // elements are equal
     selectedCards = [];
@@ -89,8 +83,6 @@ function App() {
   const [guesses, setGuesses] = useState(0);
   const [topScore, setTopScore] = useState(0);
 
-  // IMAGES = shuffleArray(IMAGES);
-
   // Event delegation listeners
   document.addEventListener('click', function(e) {
 
@@ -115,12 +107,15 @@ function App() {
       }
       // flip cards back over, change src to cardBack
         // below js not working. need to change state inside component
-      // editSrcAttribute(selectedCards[0], bgs.cardBack);
-      // editSrcAttribute(selectedCards[1], bgs.cardBack);
+      // editSrcAttribute(selectedCards[0], './assets/backOfCard.png');
+      // editSrcAttribute(selectedCards[1], './assets/backOfCard.png');
       selectedCards = [];
     }
 
   }, false);
+
+  // shuffle cards before mapping all components
+  // IMAGES = shuffleArray(IMAGES);
 
   return (
     <div className="App">
