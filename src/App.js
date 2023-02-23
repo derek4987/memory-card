@@ -99,7 +99,7 @@ function App() {
       } else return;            
     }
 
-    // to flip cards back over is there wasn't a match
+    // to flip cards back over if there wasn't a match
     if (e.target.matches('#board') && selectedCards.length === 2) {
       let buttons = document.querySelectorAll('.unMatched');
       for (const button of buttons) {
@@ -135,7 +135,7 @@ function App() {
         <div id='board'>
           {/* components cards are in 9x4 grid  */}
           {IMAGES.map(image => (
-            < Cards frontImage={image} key={image} />
+            < Cards bgImg={image} key={image} />
           ))}
         </div>
       </div>
