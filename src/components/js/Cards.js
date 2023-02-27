@@ -1,6 +1,6 @@
 // cards.js component
 
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Cards.css';
 // import cardBack from '../../assets/backOfCard.png';
 // import { photoIndex } from '../../assets/01-index';
@@ -11,7 +11,9 @@ import '../styles/Cards.css';
 
 function Cards(props) {
 
-    // const [source, setSource] = useState(bgs.cardBack);
+    const bgImg = props.bgImg;
+
+    const [source, setSource] = useState(bgImg);
 
     // const handleSetSource = (e) => {
     //     setSource(props.frontImage);
@@ -24,7 +26,7 @@ function Cards(props) {
 
     return (
         <button className='card unMatched'>
-            <img className='cardImg cardBack' src={ props.bgImg } alt='back of cards png' />
+            <img className='cardImg cardBack' src={ source } alt='back of cards png' />
         </button>
     );
 
