@@ -32,17 +32,39 @@ let IMAGES = [
   bgs.summer, bgs.summer
 ]
 
+let CLASSID = [
+  'beth', 'beth', 
+  'birdperson', 'birdperson',
+  'evilMorty', 'evilMorty', 
+  'iceT', 'iceT',
+  'jerry', 'jerry', 
+  'morty', 'morty',
+  'mrMeeseeks', 'mrMeeseeks', 
+  'mrNimbus', 'mrNimbus',
+  'mrPoopybutthole', 'mrPoopybutthole', 
+  'pencilvester', 'pencilvester',
+  'phoenixperson', 'phoenixperson', 
+  'pickleRick', 'pickleRick',
+  'planetina', 'planetina', 
+  'rick', 'rick',
+  'scaryTerry', 'scaryTerry', 
+  'spaceBeth', 'spaceBeth',
+  'squanchy', 'squanchy', 
+  'summer', 'summer'
+]
+
 // Array that tracks the number of cards you selected for your guess
 // Adds 2 cards in array
 let selectedCards = [];
 
 // shuffleArray function. shuffle image array before adding components
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
+function shuffleArray(array1, array2) {
+  for (let i = array1.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    [array1[i], array1[j]] = [array1[j], array1[i]];
+    [array2[i], array2[j]] = [array2[j], array2[i]];
   }
-  return array;
+  return [array1, array2];
 }
 // compare elements function
 function compareElements(a, b) {
@@ -115,7 +137,10 @@ function App() {
   }, false);
 
   // shuffle cards before mapping all components
-  // IMAGES = shuffleArray(IMAGES);
+  const shuffledArray = shuffleArray(IMAGES, CLASSID);
+  IMAGES = shuffledArray[0];
+  CLASSID = shuffledArray[1];
+  console.log([IMAGES, CLASSID]);
 
   return (
     <div className="App">
@@ -133,9 +158,10 @@ function App() {
       </div>
       <div id='cards-area'>
         <div id='board'>
-          {/* components cards are in 9x4 grid  */}
-          {IMAGES.map(image => (
-            < Cards bgImg={image} key={image} />
+          {/* components cards are in 9x4 grid  
+            index variable not working as expected*/}
+          {IMAGES.map((image, index) => (
+            < Cards bgImg={image} matchClass={shuffledArray[index]} key={image} />
           ))}
         </div>
       </div>

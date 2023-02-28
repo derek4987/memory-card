@@ -12,6 +12,7 @@ import '../styles/Cards.css';
 function Cards(props) {
 
     const bgImg = props.bgImg;
+    const matchClass = props.matchClass;
 
     const [source, setSource] = useState(bgImg);
 
@@ -26,7 +27,7 @@ function Cards(props) {
 
     return (
         <button className='card unMatched'>
-            <img className='cardImg cardBack' src={ source } alt='back of cards png' />
+            <img className={`cardImg cardBack ${matchClass}`} src={ source } alt='cards png' />
         </button>
     );
 
