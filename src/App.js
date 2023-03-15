@@ -121,6 +121,15 @@ function App() {
       } else return;            
     }
 
+    // add zIndex0 class to card back cards to show selected cards
+    // change ".cardBack", just temp
+    // needs to run function that finds CLASSID from selected image
+    if (e.target.matches('.cardBack')) {
+      e.target.parentElement.classList.add('zIndex0');
+      // maybe make new class to do this
+      // e.target.parentElement.classList.add('disableCards')
+    }
+
     // to flip cards back over if there wasn't a match
     if (e.target.matches('#board') && selectedCards.length === 2) {
       let buttons = document.querySelectorAll('.unMatched');
@@ -158,10 +167,15 @@ function App() {
       </div>
       <div id='cards-area'>
         <div id='board'>
-          {/* components cards are in 9x4 grid  
-            index variable not working as expected*/}
+          {/* components cards are in 9x4 grid */}
           {IMAGES.map((image, index) => (
-            < Cards bgImg={image} matchClass={shuffledArray[index]} key={image} />
+            < Cards bgImg={image} matchClass={CLASSID[index]} key={image} />
+          ))}
+        </div>
+        <div id='board2'>
+          {/* components cards are in 9x4 grid */}
+          {CLASSID.map((classID) => (
+            < Cards bgImg={bgs.cardBack} matchClass={classID} key={classID} />
           ))}
         </div>
       </div>
