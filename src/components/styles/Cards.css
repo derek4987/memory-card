@@ -24,6 +24,12 @@
     pointer-events: none;
 }
 
-.zIndex0 {
+.opacity0 {
     opacity: 0.0;
+    pointer-events: none;
+}
+
+.dimMatched {
+    opacity: 0.3;
+    background-color: white;
 }

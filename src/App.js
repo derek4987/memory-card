@@ -76,14 +76,18 @@ function checkForMatch(array) {
   // it is a match
   if (compareElements(array[0], array[1])) {
     // elements are equal
+    console.log('true');
     selectedCards = [];
     for (const item of array) {
       item.parentElement.classList.remove('unMatched');
-      item.classList.remove('selected');
       item.parentElement.classList.add('matched');
+      // make board2 img opacity0, but div underneath it semi opaque with different color
+      item.classList.add('opacity0');
+      item.parentElement.classList.add('dimMatched')
     }
   } else {
     // disable card if no match
+    console.log('false');
     let buttons = document.querySelectorAll('.unMatched');
     for (const button of buttons) {
       button.classList.add('disableCards');
@@ -109,37 +113,30 @@ function App() {
   document.addEventListener('click', function(e) {
 
     // logic for selecting a pair of card and checking for a match
-    if (e.target.matches('.selected') && selectedCards.includes(e.target) === false) {
+    // needs to run function that finds CLASSID from selected image
+    if (e.target.matches('.cardBack') && selectedCards.includes(e.target) === false) {
       if (selectedCards.length < 2) {
-        const selectedCard = e.target;
-        selectedCards.push(selectedCard);
+        e.target.parentElement.classList.add('opacity0');
+        // e.target.parentElement.classList.add('selected');
+        // ^ box shadow effect was not working since opacity is 0
+        selectedCards.push(e.target);
         console.log(selectedCards);
         if (selectedCards.length === 2) {
           checkForMatch(selectedCards);
           // update setGuesses state
-        }          
-      } else return;            
-    }
-
-    // add zIndex0 class to card back cards to show selected cards
-    // change ".cardBack", just temp
-    // needs to run function that finds CLASSID from selected image
-    if (e.target.matches('.cardBack')) {
-      e.target.parentElement.classList.add('zIndex0');
-      // maybe make new class to do this
-      // e.target.parentElement.classList.add('disableCards')
+        }
+      } else return
     }
 
     // to flip cards back over if there wasn't a match
-    if (e.target.matches('#board') && selectedCards.length === 2) {
+    if (e.target.matches('#board2') && selectedCards.length === 2) {
       let buttons = document.querySelectorAll('.unMatched');
       for (const button of buttons) {
         button.classList.remove('disableCards');
       }
-      // flip cards back over, change src to cardBack
-        // below js not working. need to change state inside component
-      // editSrcAttribute(selectedCards[0], './assets/backOfCard.png');
-      // editSrcAttribute(selectedCards[1], './assets/backOfCard.png');
+      // flip cards back over, remove opacity0 class
+      selectedCards[0].parentElement.classList.remove('opacity0');
+      selectedCards[1].parentElement.classList.remove('opacity0');
       selectedCards = [];
     }
 
