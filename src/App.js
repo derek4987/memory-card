@@ -53,8 +53,7 @@ let CLASSID = [
   'summer', 'summer'
 ]
 
-// Array that tracks the number of cards you selected for your guess
-// Adds 2 cards in array
+// Array that tracks the number of cards you selected for your guess (2 max)
 let selectedCards = [];
 
 // shuffleArray function. shuffle image array before adding components
@@ -66,6 +65,13 @@ function shuffleArray(array1, array2) {
   }
   return [array1, array2];
 }
+
+// shuffle cards before mapping all components
+const shuffledArray = shuffleArray(IMAGES, CLASSID);
+IMAGES = shuffledArray[0];
+CLASSID = shuffledArray[1];
+console.log([IMAGES, CLASSID]);
+
 // compare elements function
 function compareElements(a, b) {
   return a.outerHTML === b.outerHTML;
@@ -92,42 +98,46 @@ function checkForMatch(array) {
     for (const button of buttons) {
       button.classList.add('disableCards');
     }
-  }
+  } return
 }
-
-// game logic
-
-// button event listener, on click add counter
-  // if counter is 2, third click turns selected cards back over
-  // How to track selected cards and flip back over / gray out ??
-  // add 'selected' class to search for and compare
-
-// close notes
 
 function App() {
 
   const [guesses, setGuesses] = useState(0);
   const [topScore, setTopScore] = useState(0);
 
-  // Event delegation listeners
-  document.addEventListener('click', function(e) {
 
+  // handleClick function
+  /* handleClick logic
+   if selectedCards.length is 2 and not a match, disable cards, 3rd click flips them over
+   if selectedCards.length is 2 and is a match, disable matched cards and continue
+   add 1 to the guesses state counter using setGuesses after both scenarios
+  */
+  function handleClick(e) {
     // logic for selecting a pair of card and checking for a match
-    // needs to run function that finds CLASSID from selected image
     if (e.target.matches('.cardBack') && selectedCards.includes(e.target) === false) {
       if (selectedCards.length < 2) {
         e.target.parentElement.classList.add('opacity0');
-        // e.target.parentElement.classList.add('selected');
-        // ^ box shadow effect was not working since opacity is 0
         selectedCards.push(e.target);
         console.log(selectedCards);
         if (selectedCards.length === 2) {
           checkForMatch(selectedCards);
           // update setGuesses state
           setGuesses(prevGuesses => prevGuesses + 1);
-        }
+          // open game over modal if all cards are matched
+          if (document.querySelectorAll('.matched').length === 36 && ((guesses + 1) < topScore || topScore === 0)) {
+            // guess + 1 so it includes most recent guess, renders prior value otherwise
+            setTopScore(guesses + 1);
+            // undo 
+            // open modal
+          } else return
+        } return
       } else return
     }
+  }
+
+  // event delegation block
+  document.addEventListener('click', function(e) {
 
     // to flip cards back over if there wasn't a match
     if (e.target.matches('#board2') && selectedCards.length === 2) {
@@ -141,13 +151,17 @@ function App() {
       selectedCards = [];
     }
 
+    // modal listeners after beating game
+  
   }, false);
 
-  // shuffle cards before mapping all components
-  const shuffledArray = shuffleArray(IMAGES, CLASSID);
-  IMAGES = shuffledArray[0];
-  CLASSID = shuffledArray[1];
-  console.log([IMAGES, CLASSID]);
+  const bottomCardsList = IMAGES.map((image, index) =>
+    < Cards bgImg={image} matchClass={CLASSID[index]} key={image} />
+  );
+
+  const topCardsList = CLASSID.map((classID) =>
+    < Cards bgImg={bgs.cardBack} matchClass={classID} key={classID} handleClick={handleClick} />
+  );
 
   return (
     <div className="App">
@@ -166,15 +180,11 @@ function App() {
       <div id='cards-area'>
         <div id='board'>
           {/* components cards are in 9x4 grid */}
-          {IMAGES.map((image, index) => (
-            < Cards bgImg={image} matchClass={CLASSID[index]} key={image} />
-          ))}
+          {bottomCardsList}
         </div>
         <div id='board2'>
           {/* components cards are in 9x4 grid */}
-          {CLASSID.map((classID) => (
-            < Cards bgImg={bgs.cardBack} matchClass={classID} key={classID} />
-          ))}
+          {topCardsList}
         </div>
       </div>
     </div>
