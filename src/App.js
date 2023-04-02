@@ -1,6 +1,6 @@
 // app.js 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { photoIndex } from './assets/01-index';
 import Cards from './components/js/Cards';
@@ -124,6 +124,7 @@ function App() {
         if (selectedCards.length === 2) {
           checkForMatch(selectedCards);
           // update setGuesses state
+          setGuesses(prevGuesses => prevGuesses + 1);
         }
       } else return
     }
