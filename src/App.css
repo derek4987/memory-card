@@ -96,3 +96,69 @@ button {
 .disableCards {
     pointer-events: none;
 }
+
+/* Modal */
+.modal-open {
+    display: block;
+}
+
+.modal-close {
+    display: none;
+}
+
+.disableBackground {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30,30,30, 0.1);
+    z-index: 5;
+}
+
+.modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    border-style: double;
+    border-width: 5px;
+    border-color: rgb(65, 211, 204);
+    align-items: center;
+    top: -150px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+    background-color: rgb(68, 78, 68);
+    width: 450px;
+    height: 185px;
+    padding: 30px 40px;
+    color: white;
+    z-index: 6;
+}
+
+.modal-message {
+    font-size: 1.2rem;
+}
+
+.m-buttonArea {
+    display: flex;
+    gap: 15px;
+}
+
+.m-buttons {
+    width: 110px;
+    height: 30px;
+    font-size: 1.2rem;
+    border: 2px solid black;
+    border-radius: 15px;
+    color:black;
+    background-color: rgb(136, 132, 132);
+}
+
+.m-buttons:hover {
+    border: 2px solid rgb(65, 211, 204);
+}
+  

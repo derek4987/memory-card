@@ -187,6 +187,20 @@ function App() {
           {topCardsList}
         </div>
       </div>
+      <div className='disableBackground'>        
+      </div>
+      <div className='modal'>
+        <div className='modal-message'>
+          You matched all the cards in {guesses} guesses
+        </div>
+        <div className='modal-message'>
+          Your high score is {topScore}
+        </div>
+        <div className='m-buttonArea'>
+          <button type='button' className='m-buttons'>Try Again</button>
+          <button type='button' className='m-buttons'>Reset</button>
+        </div>
+      </div>
     </div>
   );
 }
