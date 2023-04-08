@@ -124,17 +124,66 @@ function App() {
           checkForMatch(selectedCards);
           // update setGuesses state
           setGuesses(prevGuesses => prevGuesses + 1);
-          // open game over modal if all cards are matched
-          if (document.querySelectorAll('.matched').length === 36 && ((guesses + 1) < topScore || topScore === 0)) {
-            // guess + 1 so it includes most recent guess, renders prior value otherwise
-            setTopScore(guesses + 1);
-            // undo 
+          // if all cards are matched
+          if (document.querySelectorAll('.matched').length === 36) {
+            // if new top score
+            if ((guesses + 1) < topScore || topScore === 0) {
+              // guess + 1 so it includes most recent guess, renders prior value otherwise
+              setTopScore(guesses + 1);
+            };
             // open modal
-          } else return
+            const modalWindow = document.querySelector('#modalWindow');
+            modalWindow.classList.remove('modal-close');
+            modalWindow.classList.add('modal-open');
+          } else return;
         } return
       } else return
     }
-  }
+  };
+
+  function handleButtons(e) {
+    // function to trigger when modal buttons are selected
+    if (e.target.matches('#mbTryAgain')) {
+      // reset guesses to 0 
+      setGuesses(0);
+    } else if (e.target.matches('#mbReset')) {
+      // reset guesses and top score to 0
+      setGuesses(0);
+      setTopScore(0);
+    } else return;
+    // close modal
+    const modalWindow = document.querySelector('#modalWindow');
+    modalWindow.classList.remove('modal-open');
+    modalWindow.classList.add('modal-close');
+    // reset cards
+    // if (document.querySelectorAll('.matched').length === 36) {
+    //   const cards = document.querySelectorAll('.matched');
+    //   for (let i=0; i<cards.length; i++) {
+    //     cards[i].classList.remove('matched');
+    //     cards[i].classList.add('unMatched');
+    //     cards[i].classList.remove('dimMatched');
+    //     cards[i].classList.remove('opacity0');
+    //   };
+    // } else return;
+    // remove current components so new shuffled components can replace them
+    // document.querySelector('#board').innerHTML = "";
+    // document.querySelector('#board2').innerHTML = "";
+    // shuffle cards
+    // const newRound = shuffleArray(IMAGES, CLASSID);
+    // const newIMAGES = newRound[0];
+    // const newCLASSID = newRound[1];
+    // console.log([newIMAGES, newCLASSID]);
+    // const newBottomCardsList = newIMAGES.map((image, index) =>
+    // < Cards bgImg={image} matchClass={newCLASSID[index]} key={image} />
+    // );
+    // const newTopCardsList = newCLASSID.map((classID) =>
+    //   < Cards bgImg={bgs.cardBack} matchClass={classID} key={classID} handleClick={handleClick} />
+    // );
+    // bottomCardsList.concat(newBottomCardsList);
+    // bottomCardsList.splice(0,36);
+    // topCardsList.concat(newTopCardsList);
+    // topCardsList.splice(0,36);
+  };
 
   // event delegation block
   document.addEventListener('click', function(e) {
@@ -187,18 +236,20 @@ function App() {
           {topCardsList}
         </div>
       </div>
-      <div className='disableBackground'>        
-      </div>
-      <div className='modal'>
-        <div className='modal-message'>
-          You matched all the cards in {guesses} guesses
+      <div id='modalWindow' class="modal-close">
+        <div className='disableBackground'>
         </div>
-        <div className='modal-message'>
-          Your high score is {topScore}
-        </div>
-        <div className='m-buttonArea'>
-          <button type='button' className='m-buttons'>Try Again</button>
-          <button type='button' className='m-buttons'>Reset</button>
+        <div className='modal'>
+          <div className='modal-message'>
+            You matched all the cards in {guesses} guesses
+          </div>
+          <div className='modal-message'>
+            Your high score is {topScore}
+          </div>
+          <div className='m-buttonArea'>
+            <button type='button' id='mbTryAgain' className='m-buttons' onClick={handleButtons}>Try Again</button>
+            <button type='button' id='mbReset' className='m-buttons' onClick={handleButtons}>Reset</button>
+          </div>
         </div>
       </div>
     </div>
