@@ -105,6 +105,8 @@ function App() {
 
   const [guesses, setGuesses] = useState(0);
   const [topScore, setTopScore] = useState(0);
+  const [imageState, setImage] = useState(IMAGES);
+  const [classIDState, setClassID] = useState(CLASSID);
 
 
   // handleClick function
@@ -156,33 +158,23 @@ function App() {
     modalWindow.classList.remove('modal-open');
     modalWindow.classList.add('modal-close');
     // reset cards
-    // if (document.querySelectorAll('.matched').length === 36) {
-    //   const cards = document.querySelectorAll('.matched');
-    //   for (let i=0; i<cards.length; i++) {
-    //     cards[i].classList.remove('matched');
-    //     cards[i].classList.add('unMatched');
-    //     cards[i].classList.remove('dimMatched');
-    //     cards[i].classList.remove('opacity0');
-    //   };
-    // } else return;
-    // remove current components so new shuffled components can replace them
-    // document.querySelector('#board').innerHTML = "";
-    // document.querySelector('#board2').innerHTML = "";
-    // shuffle cards
-    // const newRound = shuffleArray(IMAGES, CLASSID);
-    // const newIMAGES = newRound[0];
-    // const newCLASSID = newRound[1];
-    // console.log([newIMAGES, newCLASSID]);
-    // const newBottomCardsList = newIMAGES.map((image, index) =>
-    // < Cards bgImg={image} matchClass={newCLASSID[index]} key={image} />
-    // );
-    // const newTopCardsList = newCLASSID.map((classID) =>
-    //   < Cards bgImg={bgs.cardBack} matchClass={classID} key={classID} handleClick={handleClick} />
-    // );
-    // bottomCardsList.concat(newBottomCardsList);
-    // bottomCardsList.splice(0,36);
-    // topCardsList.concat(newTopCardsList);
-    // topCardsList.splice(0,36);
+    if (document.querySelectorAll('.matched').length === 36) {
+      const cards = document.querySelectorAll('.matched');
+      for (let i=0; i<cards.length; i++) {
+        cards[i].classList.remove('matched');
+        cards[i].classList.add('unMatched');
+        cards[i].classList.remove('dimMatched');
+        cards[i].classList.remove('opacity0');
+        cards[i].firstChild.classList.remove('opacity0');
+      };
+    } else return;
+    // update card states (shuffle them)
+    const newShuffledArray = shuffleArray(IMAGES, CLASSID);
+    const newIMAGES = newShuffledArray[0];
+    const newCLASSID = newShuffledArray[1];
+    console.log([newIMAGES, newCLASSID]);
+    setImage(newIMAGES);
+    setClassID(newCLASSID);
   };
 
   // event delegation block
@@ -204,12 +196,12 @@ function App() {
   
   }, false);
 
-  const bottomCardsList = IMAGES.map((image, index) =>
-    < Cards bgImg={image} matchClass={CLASSID[index]} key={image} />
+  const bottomCardsList = imageState.map((image, index) =>
+    < Cards bgImg={image} matchClass={classIDState[index]} key={`cardImage${index}`} />
   );
 
-  const topCardsList = CLASSID.map((classID) =>
-    < Cards bgImg={bgs.cardBack} matchClass={classID} key={classID} handleClick={handleClick} />
+  const topCardsList = classIDState.map((classID, index) =>
+    < Cards bgImg={bgs.cardBack} matchClass={classID} key={`cardBack${index}`} handleClick={handleClick} />
   );
 
   return (

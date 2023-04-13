@@ -9,7 +9,7 @@ function Cards(props) {
     const matchClass = props.matchClass;
     const handleClick = props.handleClick;
 
-    const [source, setSource] = useState(bgImg);
+    let source = bgImg();
 
     return (
         <button className='card unMatched'>
