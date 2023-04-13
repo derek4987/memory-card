@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/memory-card/static/css/main.87a305b8.css",
+    "main.js": "/memory-card/static/js/main.2175657d.js",
+    "static/js/787.d6a8b40f.chunk.js": "/memory-card/static/js/787.d6a8b40f.chunk.js",
+    "static/media/backOfCard.png": "/memory-card/static/media/backOfCard.a218ca229093de6f08d2.png",
+    "static/media/pencilvester.jpg": "/memory-card/static/media/pencilvester.32eacd5dcd78361503c2.jpg",
+    "static/media/squanchy.jpg": "/memory-card/static/media/squanchy.05a61023c62d30709d0a.jpg",
+    "static/media/jerry.jpg": "/memory-card/static/media/jerry.0c0b59bf2df7ffaeca63.jpg",
+    "static/media/RandMLogo.png": "/memory-card/static/media/RandMLogo.42c8df0b92603ef2e2e2.png",
+    "static/media/pickleRick.jpg": "/memory-card/static/media/pickleRick.c1e917d7b6a0a4d60596.jpg",
+    "static/media/evilMorty.jpg": "/memory-card/static/media/evilMorty.ad71c082c9085d51c9a2.jpg",
+    "static/media/birdperson.jpg": "/memory-card/static/media/birdperson.5da26067ec1f420eb547.jpg",
+    "static/media/mrPoopybutthole.jpg": "/memory-card/static/media/mrPoopybutthole.3f1425817c40b1dafc5e.jpg",
+    "static/media/rick.jpg": "/memory-card/static/media/rick.31691c3dddbfff199562.jpg",
+    "static/media/planetina.jpg": "/memory-card/static/media/planetina.f43c41b4f521bc88770e.jpg",
+    "static/media/mrNimbus.jpg": "/memory-card/static/media/mrNimbus.e9a9f43b2fe426770a63.jpg",
+    "static/media/phoenixperson.jpg": "/memory-card/static/media/phoenixperson.cd86f6cf3f3987ba06e4.jpg",
+    "static/media/mrMeeseeks.jpg": "/memory-card/static/media/mrMeeseeks.5af0e4f94974499a5385.jpg",
+    "static/media/iceT.jpg": "/memory-card/static/media/iceT.51b63baba651b7996620.jpg",
+    "static/media/spaceBeth.jpg": "/memory-card/static/media/spaceBeth.baee371e926cb48d190c.jpg",
+    "static/media/scaryTerry.jpg": "/memory-card/static/media/scaryTerry.756229c4f2e85d04b729.jpg",
+    "static/media/morty.jpg": "/memory-card/static/media/morty.2bcd394a15511ee0d8f9.jpg",
+    "static/media/beth.jpg": "/memory-card/static/media/beth.fb7e16bf907965f2532c.jpg",
+    "static/media/summer.jpg": "/memory-card/static/media/summer.00bea12fc7b1b2ac6e47.jpg",
+    "index.html": "/memory-card/index.html",
+    "main.87a305b8.css.map": "/memory-card/static/css/main.87a305b8.css.map",
+    "main.2175657d.js.map": "/memory-card/static/js/main.2175657d.js.map",
+    "787.d6a8b40f.chunk.js.map": "/memory-card/static/js/787.d6a8b40f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87a305b8.css",
+    "static/js/main.2175657d.js"
+  ]
+}
